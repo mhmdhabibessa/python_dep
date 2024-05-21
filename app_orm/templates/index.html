@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	td,
+	th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+
+	tr:nth-child(even) {
+		background-color: #dddddd;
+	}
+</style>
+
+<body>
+
+	<div style="background-color: rgb(244, 241, 241); border: 1px saddlebrown solid; 
+    padding: 20px; border-radius: 15px; box-shadow: 8px 5px 5px black;">
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti cupiditate consequuntur quasi perferendis
+			voluptates dignissimos explicabo vitae eius excepturi possimus maxime asperiores vero ullam soluta animi
+			voluptate iusto, itaque alias, quibusdam iure libero. Praesentium at sequi itaque quaerat. Accusantium in
+			rerum, nam eaque natus minima asperiores ea quae commodi tenetur. Fuga, nostrum quia commodi doloribus
+			aperiam soluta minima odit adipisci eaque ullam? Nesciunt pariatur aliquam quam rem exercitationem
+			praesentium porro molestias animi, consequuntur eaque odit iste incidunt modi, commodi maiores. Commodi
+			magnam distinctio dolorem est hic nihil nemo veritatis minima non porro corrupti fugit, esse sapiente beatae
+			expedita excepturi doloremque! Necessitatibus tenetur doloribus rerum excepturi debitis, fuga dolore
+			asperiores ex veritatis velit? Repudiandae omnis doloribus illum quisquam! Error, temporibus ipsam molestias
+			aperiam ullam quis pariatur praesentium corrupti beatae, aliquid nam iusto, debitis quod? Voluptatibus
+			aliquam, velit natus obcaecati quia culpa consequatur optio sunt, voluptates in laboriosam molestiae
+			similique consectetur? Tempora unde dolorum impedit accusantium ad? Illum, reprehenderit inventore quaerat
+			unde voluptates ab error qui ratione architecto possimus repellat! Quas, omnis? Hic placeat libero rerum
+			quisquam fugiat minus! Unde similique nam nulla assumenda perferendis exercitationem vero, facere animi
+			quaerat officiis magni minus reiciendis laboriosam amet. Quod porro pariatur, possimus placeat officia
+			voluptate laboriosam maiores est dignissimos doloribus eum accusamus exercitationem, et tempora magni
+			dolorem esse ullam vitae deleniti adipisci distinctio fuga vero. Dolores iusto sunt atque. Optio voluptatem,
+			rem reprehenderit laboriosam repudiandae, iure deserunt dolorum ratione, ducimus molestiae consequatur in ex
+			recusandae fugiat voluptates earum tempora laudantium eligendi porro voluptas sint vel odio. Commodi
+			doloremque temporibus repellendus recusandae? Suscipit voluptates repellat pariatur ipsum incidunt
+			reiciendis ea nobis sit amet unde! Repellendus soluta reprehenderit minus, officiis accusantium voluptatem
+			cupiditate? Accusamus ex molestiae tempora quas. Hic tempora, ipsum facere rerum magnam ipsam qui libero
+			laudantium! Rerum nemo eos, alias repudiandae voluptatibus quasi commodi omnis sit aut beatae odio quo.
+			Quibusdam voluptatibus neque dolorum? Neque dolores totam tempore quos officiis atque, similique accusantium
+			autem ea commodi nemo obcaecati. Molestias laboriosam, doloribus at laudantium quis, voluptate excepturi
+			illo inventore ut porro aut ea ducimus delectus saepe expedita laborum nisi sequi, animi quae a voluptates
+			aliquam. Pariatur officia voluptatibus neque velit temporibus veritatis modi est maiores architecto
+			laudantium incidunt quae facilis libero assumenda, quaerat tempora? Provident fuga, voluptatum debitis et in
+			molestias maiores facilis sapiente modi, ipsum doloribus vitae optio voluptas. Numquam aperiam labore nemo
+			dolore commodi ipsa perspiciatis earum? Omnis sunt sed labore repellat maxime.
+		</p>
+		<table>
+			<h1>Actors List</h1>
+			<tr>
+				<th>Actor Name</th>
+				<th>Start From</th>
+				<th>Movies</th>
+			</tr>
+			{% for actor in actors %}
+			<tr>
+				<td>{{ actor.name }}</td>
+				<td>{{ actor.created_at }}</td>
+				<td>
+					{% for movie in actor.movies.all %}
+					<em>{{ movie.title }},</em>
+					{% endfor %}
+				</td>
+			</tr>
+			{% endfor %}
+
+		</table>
+		<p>Sort Table Rows by Clicking on the Table Headers - Ascending and Descending (jQuery)</p>
+		<a href="/form-movie">
+			<button 
+				style="background-color: black; color: aliceblue; padding: 5px; box-shadow: 2px 2px 2px white; border-radius: 5px;">
+				Create Movie
+			</button>
+		</a>
+		<div style="display: flex; justify-content: space-between; margin-top: 30px;">
+			{% for movie in movies %}
+			<div
+				style="background-color: white; box-shadow: 4px 4px 4px black; border-top-left-radius: 25px; border-top-right-radius: 25px;">
+				<div>
+					<img style="border-radius: 25px;" width="290px" height="260px" src="{{movie.image_url}}"
+						alt="{{ movie.title }}">
+				</div>
+
+				<div style="padding: 8px;">
+					<div>
+						<h1>{{ movie.title }}</h1>
+						<p>{{ movie.description }}</p>
+					</div>
+					<p>Duration : {{ movie.duration }}</p>
+					<h3>Actors:</h3>
+					<ul>
+						{% for actor in movie.actors.all %}
+						<li>{{ actor.name }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+			</div>
+			{% endfor %}
+		</div>
+
+		<h2>
+			{% for book in books %}
+			<h1>Book : {{book.title}}</h1>
+			{% for pub in book.publishers.all %}
+			<li> Pub: {{ pub.name }}</li>
+			{% endfor%}
+			{% endfor %}
+		</h2>
+</body>
+
+</html>
